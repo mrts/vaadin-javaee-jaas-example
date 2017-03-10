@@ -2,12 +2,16 @@ package com.jaasexample;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.cdi.CDIUI;
+import com.vaadin.cdi.CDIViewProvider;
+import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+
+import javax.inject.Inject;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser window (or tab) or some part of
@@ -20,20 +24,18 @@ import com.vaadin.ui.VerticalLayout;
 @Theme("jaasexampletheme")
 public class JaasexampleUI extends UI {
 
+    @Inject
+    private CDIViewProvider viewProvider;
+
     @Override
     protected void init(VaadinRequest vaadinRequest) {
-        final VerticalLayout layout = new VerticalLayout();
+        final VerticalLayout contentArea = new VerticalLayout();
+        contentArea.setMargin(false);
+        setContent(contentArea);
 
-        final TextField name = new TextField();
-        name.setCaption("Type your name here:");
+        final Navigator navigator = new Navigator(this, contentArea);
+        navigator.addProvider(viewProvider);
 
-        Button button = new Button("Click Me");
-        button.addClickListener(e -> {
-            layout.addComponent(new Label("Thanks " + name.getValue() + ", it works!"));
-        });
-
-        layout.addComponents(name, button);
-
-        setContent(layout);
+        navigator.navigateTo(SecureView.VIEW_NAME);
     }
 }
