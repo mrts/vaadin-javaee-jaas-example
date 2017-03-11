@@ -8,8 +8,10 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
+import javax.annotation.security.RolesAllowed;
+
 @CDIView(SecureView.VIEW_NAME)
-// @RolesAllowed("users")
+@RolesAllowed("users")
 public class SecureView extends VerticalLayout implements View {
 
     public static final String VIEW_NAME = "secure";

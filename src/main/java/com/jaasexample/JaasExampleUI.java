@@ -5,9 +5,6 @@ import com.vaadin.cdi.CDIUI;
 import com.vaadin.cdi.CDIViewProvider;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
@@ -22,7 +19,7 @@ import javax.inject.Inject;
  */
 @CDIUI("")
 @Theme("jaasexampletheme")
-public class JaasexampleUI extends UI {
+public class JaasExampleUI extends UI {
 
     @Inject
     private CDIViewProvider viewProvider;
@@ -35,6 +32,7 @@ public class JaasexampleUI extends UI {
 
         final Navigator navigator = new Navigator(this, contentArea);
         navigator.addProvider(viewProvider);
+        navigator.setErrorView(LoginView.class);
 
         navigator.navigateTo(SecureView.VIEW_NAME);
     }
