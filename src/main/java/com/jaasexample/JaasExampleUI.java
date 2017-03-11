@@ -32,8 +32,17 @@ public class JaasExampleUI extends UI {
 
         final Navigator navigator = new Navigator(this, contentArea);
         navigator.addProvider(viewProvider);
-        navigator.setErrorView(LoginView.class);
+        navigator.setErrorView(UnauthorizedErrorView.class);
 
-        navigator.navigateTo(SecureView.VIEW_NAME);
+        if (isUserAuthenticated(vaadinRequest)) {
+            navigator.navigateTo(SecureView.VIEW_NAME);
+        } else {
+            navigator.navigateTo(LoginView.VIEW_NAME + "/" + SecureView.VIEW_NAME);
+        }
     }
+
+    private boolean isUserAuthenticated(final VaadinRequest vaadinRequest) {
+        return vaadinRequest.getUserPrincipal() != null;
+    }
+
 }
