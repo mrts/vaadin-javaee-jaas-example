@@ -7,11 +7,11 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
 @CDIView("unauthorized")
-public class UnauthorizedErrorView extends VerticalLayout implements View {
+public class InaccessibleErrorView extends VerticalLayout implements View {
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
-        addComponent(new Label("Sorry, you are not authorized to access this view"));
+        addComponent(new Label("Sorry, view does not exist or you are not authorized to access it"));
     }
 
 }

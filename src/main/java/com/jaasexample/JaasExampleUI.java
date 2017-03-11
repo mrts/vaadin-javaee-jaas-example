@@ -33,7 +33,7 @@ public class JaasExampleUI extends UI {
 
         final Navigator navigator = new Navigator(this, contentArea);
         navigator.addProvider(viewProvider);
-        navigator.setErrorView(UnauthorizedErrorView.class);
+        navigator.setErrorView(InaccessibleErrorView.class);
 
         String defaultView = Page.getCurrent().getUriFragment();
         if (defaultView == null || defaultView.trim().isEmpty()) {
