@@ -31,7 +31,7 @@ public class LoginView extends LoginForm implements View {
         try {
             JaasAccessControl.login(username, password);
             Notification.show("Login successful");
-            final String nextView = parameters != null ? parameters : "secure";
+            final String nextView = parameters != null ? parameters : SecureView.VIEW_NAME;
             getUI().getNavigator().navigateTo(nextView);
 
         } catch (ServletException e) {
