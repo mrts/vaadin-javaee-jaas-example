@@ -5,7 +5,9 @@ and authorize users using JAAS and Vaadin CDI add-on, login form and view
 navigator.
 
 Tested with WildFly 10.1, but should work equally well with other Java EE 7
-application servers.
+application servers (and probably Java EE 6 application servers once you
+downgrade the `javaee-api` Maven dependency; you may also need to add
+`web.xml` and more configuration).
 
 ## Adding users
 
@@ -16,8 +18,8 @@ within the `bin` folder of your WildFly installation and enter the requested
 information. Choose *b) Application user* and add the user to the group
 *users*.
 
-You may need to restart WildFly if is currently running to make it pick up the
-new users.
+You may need to restart WildFly if it is currently running to make it pick up
+the new users.
 
 ## Building and running
 
