@@ -4,6 +4,7 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.cdi.CDIUI;
 import com.vaadin.cdi.CDIViewProvider;
 import com.vaadin.navigator.Navigator;
+import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -34,10 +35,15 @@ public class JaasExampleUI extends UI {
         navigator.addProvider(viewProvider);
         navigator.setErrorView(UnauthorizedErrorView.class);
 
+        String defaultView = Page.getCurrent().getUriFragment();
+        if (defaultView == null || defaultView.trim().isEmpty()) {
+            defaultView = SecureView.VIEW_NAME;
+        }
+
         if (isUserAuthenticated(vaadinRequest)) {
-            navigator.navigateTo(SecureView.VIEW_NAME);
+            navigator.navigateTo(defaultView);
         } else {
-            navigator.navigateTo(LoginView.VIEW_NAME + "/" + SecureView.VIEW_NAME);
+            navigator.navigateTo(LoginView.VIEW_NAME + "/" + defaultView);
         }
     }
 
